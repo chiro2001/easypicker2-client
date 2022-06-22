@@ -16,6 +16,7 @@ const Manage = () => import('@/pages/dashboard/manage/index.vue')
 const Overview = () => import('@/pages/dashboard/manage/overview/index.vue')
 const User = () => import('@/pages/dashboard/manage/user/index.vue')
 const Task = () => import('@/pages/task/index.vue')
+const Query = () => import('@/pages/query/index.vue')
 
 const routes: RouteRecordRaw[] = [
   // 404
@@ -97,6 +98,14 @@ const routes: RouteRecordRaw[] = [
     component: Task,
     meta: {
       title: '文件提交',
+    },
+  },
+  {
+    path: '/query/:sid',
+    name: 'query',
+    component: Query,
+    meta: {
+      title: '提交查询',
     },
   },
   {
