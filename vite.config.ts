@@ -42,12 +42,12 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api/': {
-        target: 'http://router.chiro.work:3000',
+        target: 'http://localhost:3000',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api/, ''),
       },
       '/api-test/': {
-        target: 'https://ep.dev.sugarat.top',
+        target: 'http://router.chiro.work:3000',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api-test/, 'api/'),
       },
