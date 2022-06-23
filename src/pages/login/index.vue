@@ -47,7 +47,7 @@
           <el-button @click="login()" type="primary" class="fw-w100">登录</el-button>
         </div>
         <el-divider></el-divider>
-        <div class="links">
+        <div class="links" v-if="canRegister">
           <router-link to="/register">快速注册</router-link>
         </div>
       </div>
@@ -75,6 +75,9 @@ const remember = ref(false)
 const accountLogin = ref(true)
 const $store = useStore()
 const $router = useRouter()
+
+const canRegister = ref(true);
+
 const redirectDashBoard = () => {
   $router.replace({
     name: 'dashboard',
@@ -180,7 +183,9 @@ const login = () => {
     })
   }
 }
-onMounted(() => {
+onMounted(async () => {
+  canRegister.value = await UserApi.checkCanRegister();
+
   const token = localStorage.getItem('token')
   if (token) {
     redirectDashBoard()

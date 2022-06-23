@@ -3,37 +3,15 @@
     <login-panel>
       <div class="inputArea">
         <div>
-          <el-input
-            maxlength="11"
-            placeholder="输入账号"
-            :prefix-icon="User"
-            v-model="account"
-            clearable
-          ></el-input>
+          <el-input maxlength="11" placeholder="输入账号" :prefix-icon="User" v-model="account" clearable></el-input>
         </div>
         <div>
-          <el-input
-            maxlength="16"
-            minlength="6"
-            type="password"
-            placeholder="请输入密码"
-            :prefix-icon="Lock"
-            v-model="pwd1"
-            show-password
-            clearable
-          ></el-input>
+          <el-input maxlength="16" minlength="6" type="password" placeholder="请输入密码" :prefix-icon="Lock" v-model="pwd1"
+            show-password clearable></el-input>
         </div>
         <div>
-          <el-input
-            maxlength="16"
-            minlength="6"
-            type="password"
-            placeholder="请再次输入密码"
-            :prefix-icon="Lock"
-            v-model="pwd2"
-            show-password
-            clearable
-          ></el-input>
+          <el-input maxlength="16" minlength="6" type="password" placeholder="请再次输入密码" :prefix-icon="Lock"
+            v-model="pwd2" show-password clearable></el-input>
         </div>
         <div class="tc">
           <el-checkbox v-model="bindPhone">绑定手机</el-checkbox>
@@ -44,23 +22,10 @@
           </el-tooltip>
         </div>
         <div v-if="bindPhone">
-          <el-input
-            maxlength="11"
-            placeholder="输入手机号"
-            :prefix-icon="Phone"
-            v-model="phone"
-            clearable
-          ></el-input>
+          <el-input maxlength="11" placeholder="输入手机号" :prefix-icon="Phone" v-model="phone" clearable></el-input>
         </div>
         <div v-if="bindPhone">
-          <el-input
-            maxlength="4"
-            type="number"
-            placeholder="请输入验证码"
-            :prefix-icon="Lock"
-            v-model="code"
-            clearable
-          >
+          <el-input maxlength="4" type="number" placeholder="请输入验证码" :prefix-icon="Lock" v-model="code" clearable>
             <template #append>
               <el-button :disabled="time !== 0" @click="getCode">{{ codeText }}</el-button>
             </template>
@@ -78,7 +43,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import loginPanel from '@components/loginPanel.vue'
@@ -178,6 +143,15 @@ const handleRegister = () => {
   })
 }
 
+onMounted(async () => {
+  const canRegister = await UserApi.checkCanRegister();
+  if (!canRegister) {
+    $router.push({
+      path: "/"
+    });
+  }
+});
+
 </script>
 <style scoped lang="scss">
 .register {
@@ -188,13 +162,16 @@ const handleRegister = () => {
 .inputArea {
   margin: 0 auto;
   max-width: 320px;
-  > div {
+
+  >div {
     margin-top: 10px;
   }
 }
+
 .links {
   display: flex;
   justify-content: center;
+
   a {
     color: #409eff;
     margin-left: 10px;
