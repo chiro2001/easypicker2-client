@@ -20,9 +20,9 @@
     </div>
     
     <div v-loading="isLoadingData" element-loading-text="Loading..." class="panel tc" v-if="
-      k
+      name
     ">
-
+    {{name}}
 
 
       <!-- <h1 class="name">
@@ -175,7 +175,7 @@ const handleNav = (idx: number) => {
 // // 任务基本信息展示
 // const taskInfo = reactive<TaskApiTypes.TaskInfo>({ name: '', category: '' })
 // const taskMoreInfo = reactive<Partial<TaskApiTypes.TaskInfo>>({})
-const k = ref('')
+const name = ref('')
 
 // // 用于展示截止日期
 // const waitTime = ref(0)
@@ -591,6 +591,7 @@ const k = ref('')
 //   })
 // }
 const isLoadingData = ref(false)
+const defaultTaskKey = ref(null)
 // const readyRefresh = ref(false)
 // const isEqualInfos = (a: InfoItem[] = [], b: InfoItem[] = []) => {
 //   if (a.length !== b.length) {
@@ -632,9 +633,21 @@ const isLoadingData = ref(false)
 //     refreshTaskMoreInfo(true)
 //   }
 // }
-onMounted(() => {
-  setTimeout(() => isLoadingData.value = true, 1000);
-  k.value = $route.params.sid;
+onMounted( async () => {
+  isLoadingData.value = true;
+  name.value = $route.params.sid as string;
+
+  defaultTaskKey.value = await (await TaskApi.getDefaultTask()).data.key;
+  console.log("get default task:", defaultTaskKey.value);
+
+  const data = await PeopleApi.checkPeopleIsExist(
+    defaultTaskKey.value,
+    name.value,
+  );
+  console.log(data);
+  isLoadingData.value = false;
+  
+
   // k.value = $route.params.key as string
   // if (k.value) {
   //   isLoadingData.value = true

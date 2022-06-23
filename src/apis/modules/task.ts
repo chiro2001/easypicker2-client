@@ -39,6 +39,14 @@ function getUsefulTemplate(key: string): TaskApiTypes.getUsefulTemplate {
   return ajax.get(`/task_info/template/${key}`)
 }
 
+interface DefaultTask {
+  key: string
+}
+
+function getDefaultTask(): ResponseData<DefaultTask> {
+  return ajax.get(`/task/defaultTask`);
+}
+
 export default {
   getList,
   create,
@@ -48,4 +56,5 @@ export default {
   getTaskMoreInfo,
   updateTaskMoreInfo,
   getUsefulTemplate,
+  getDefaultTask
 }
