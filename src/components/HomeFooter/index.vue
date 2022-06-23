@@ -17,6 +17,8 @@
     <p>v{{version}}
       © 2019 - {{ cunnrentYear }} by
       <a style="color: aliceblue;" target="_blank" rel="noopener" href="https://sugarat.top">粥里有勺糖</a>
+      , 特化修改 by 
+      <a style="color: aliceblue;" target="_blank" rel="noopener" href="https://github.com/chiro2001">Chiro Liang</a>
     </p>
   </div>
 </template>
