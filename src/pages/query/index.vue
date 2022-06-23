@@ -2,13 +2,6 @@
   <div class="task-panel">
     <div class="pc-nav">
       <div class="nav">
-        <!-- LOGO -->
-        <div class="logo">
-          <router-link to="/">
-            <img style="height: 40px;width: 170px;" src="https://img.cdn.sugarat.top/easypicker/EasyPicker.png"
-              alt="logo" />
-          </router-link>
-        </div>
         <nav>
           <div class="nav-item" v-for="(n, idx) in pcNavs" :key="idx" @click="handleNav(idx)">
             {{ n.title }}
@@ -57,25 +50,26 @@ import {
 import { useStore } from 'vuex'
 import {
   FileApi,
-  PeopleApi,
   TaskApi,
 } from '@/apis'
-import { parseInfo } from '@/utils/stringUtil'
 
 const $store = useStore()
 const isMobile = computed(() => $store.getters['public/isMobile'])
 // 顶部导航
 const $router = useRouter()
 const $route = useRoute()
+
+const defaultTaskKey = ref(null)
+
 const pcNavs = reactive([
   {
-    title: '我也要收集',
+    title: '我也要提交',
     path: '/',
   },
 ])
 const handleNav = (idx: number) => {
   $router.push({
-    path: pcNavs[idx].path,
+    path: defaultTaskKey.value ? `/task/${defaultTaskKey.value}` : pcNavs[idx].path,
   })
 }
 
@@ -127,7 +121,6 @@ const confirmPeopleName = () => ElMessageBox.prompt(
   })
 
 const isLoadingData = ref(false)
-const defaultTaskKey = ref(null)
 
 const isEqualInfos = (a: InfoItem[] = [], b: InfoItem[] = []) => {
   if (a.length !== b.length) {
