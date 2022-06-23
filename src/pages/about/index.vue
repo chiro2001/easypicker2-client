@@ -8,7 +8,8 @@
             </div>
             <div class="panel">
                 <h1>简介</h1>
-                <p>在线文件收取助手,帮助用户快速的完成一对多的文件收取</p>
+                <p>在线文件收取助手，帮助用户快速的完成一对多的文件收取．</p>
+                <p>由 <a href="https://chiro.work">Chiro</a> 添加了展示页面等．</p>
             </div>
             <div class="panel">
                 <h1>诞生背景</h1>
@@ -22,7 +23,7 @@
                 <p>弊端显而易见,不方便整理统计。还占用电脑/手机内存</p>
                 <p>为了解决这个问题,此项目应运而生</p>
                 <p>当然<span><strong>市面上也有几款类似的办公工具</strong></span> ,功能及使用方式都差不多</p>
-                <p>本项目<strong>是 <a href="https://github.com/ATQQ/easypicker2-client">开源</a> 的</strong> </p>
+                <p>本项目<strong>是 <a href="https://github.com/chiro2001/easypicker2-client">开源</a> 的</strong> </p>
                 <p>如有私有化的需求,可自行部署使用(也可 <router-link to="/author">联系作者</router-link> 提供帮助)</p>
             </div>
             <div class="panel">
@@ -63,6 +64,10 @@
                     <li><a target="_blank" href="https://github.com/ATQQ/easypicker2-server">Easypicker2.0-服务端</a></li>
                 </ul>
                 <ul>
+                    <li><a target="_blank" href="https://github.com/chiro2001/easypicker2-client">Easypicker2.0-hitsz-客户端</a></li>
+                    <li><a target="_blank" href="https://github.com/chiro2001/easypicker2-server">Easypicker2.0-hitsz-服务端</a></li>
+                </ul>
+                <ul>
                     <li><a target="_blank" href="https://github.com/ATQQ/vite-vue3-template">Easypicker2.0-客户端模板仓库</a></li>
                     <li><a target="_blank" href="https://github.com/ATQQ/node-server">Easypicker2.0-服务端模板仓库</a></li>
                 </ul>
@@ -71,6 +76,11 @@
                     <li><a target="_blank" href="https://sugarat.top">博客</a></li>
                     <li><a target="_blank" href="https://github.com/ATQQ">Github</a></li>
                     <li><a target="_blank" href="https://juejin.cn/user/1028798615918983">掘金</a></li>
+                </ul>
+                <h2><span style="color:grey;font-size:0.8rem;">(Chiro 的私货时间！)</span></h2>
+                <ul>
+                    <li><a target="_blank" href="https://chiro.work">博客</a></li>
+                    <li><a target="_blank" href="https://github.com/chiro2001">Github</a></li>
                 </ul>
             </div>
             <!-- <div class="panel">

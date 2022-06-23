@@ -19,12 +19,12 @@
                     <li>
                         <a href="https://github.com/chiro2001/easypicker2-client" target="_blank" rel="noopener noreferrer">GitHub</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="https://docs.ep.sugarat.top/plan/todo.html" target="_blank" rel="noopener noreferrer">近期规划</a>
                     </li>
                     <li>
                         <a href="https://docs.ep.sugarat.top/plan/log.html" target="_blank" rel="noopener noreferrer">更新日志</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </nav>
@@ -48,14 +48,14 @@ onMounted(() => {
       href: '/login',
       text: '登录',
     },
-    {
-      href: '/register',
-      text: '快速注册',
-    },
-    {
-      href: '/wish',
-      text: '需求墙',
-    },
+    // {
+    //   href: '/register',
+    //   text: '快速注册',
+    // },
+    // {
+    //   href: '/wish',
+    //   text: '需求墙',
+    // },
     {
       href: '/about',
       text: '关于',
