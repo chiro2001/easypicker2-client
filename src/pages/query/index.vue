@@ -23,9 +23,9 @@
       sid
     ">
       {{ sid }}
-      {{ displayData.relativeData.name }}
+      {{ displayData }}
 
-      <img v-src="displayData.image.link" v-if="displayData.image.link"/>
+      <img v-bind:src="displayData.image.link" v-if="displayData.image.link" />
 
       <!-- <h1 class="name">
         {{ taskInfo.name }}
@@ -306,7 +306,10 @@ onMounted(async () => {
   // 已经提交的话就直接展示，没有提交的话跳转到展示页面
 
   if (isSubmit) {
-
+    const submittedFile = await FileApi.getStudentSubmitFile(defaultTaskKey.value, parseInt(sid.value), peopleName.value)
+    displayData.image.link = submittedFile.data.link;
+    displayData.image.mimeType = submittedFile.data.mimeType;
+    console.log(displayData.image.link);
   }
 
   isLoadingData.value = false;

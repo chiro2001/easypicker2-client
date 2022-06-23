@@ -100,8 +100,12 @@ function checkSubmitStatus(taskKey:string, info:any, name = ''):FileApiTypes.che
   })
 }
 
-function checkStudentSubmitStatus(taskKey:string, sid: number, name = ''): FileApiTypes.checkSubmitStatus {
+function checkStudentSubmitStatus(taskKey: string, sid: number, name = ''): FileApiTypes.checkSubmitStatus {
   return ajax.post(`file/submit/student/${sid}`, { taskKey, name })
+}
+
+function getStudentSubmitFile(taskKey: string, sid: number, name = ''): FileApiTypes.getOneFileUrl {
+  return ajax.get(`file/oneStudent/${sid}`, { params: { taskKey, name }})
 }
 
 function checkImageFilePreviewUrl(ids:number[]):FileApiTypes.checkImageFilePreviewUrl {
@@ -125,4 +129,5 @@ export default {
   checkSubmitStatus,
   checkImageFilePreviewUrl,
   checkStudentSubmitStatus,
+  getStudentSubmitFile
 }
