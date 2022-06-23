@@ -113,7 +113,7 @@ const routes: RouteRecordRaw[] = [
     name: 'dashboard',
     component: Dashboard,
     redirect: {
-      name: 'tasks',
+      sid: 'tasks',
     },
     children: [
       {
@@ -137,7 +137,7 @@ const routes: RouteRecordRaw[] = [
         path: 'manage',
         component: Manage,
         redirect: {
-          name: 'overview',
+          sid: 'overview',
         },
         children: [
           {
