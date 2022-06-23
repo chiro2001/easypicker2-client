@@ -23,7 +23,9 @@
       sid
     ">
       {{ sid }}
+      {{ displayData.relativeData.name }}
 
+      <img v-src="displayData.image.link" v-if="displayData.image.link"/>
 
       <!-- <h1 class="name">
         {{ taskInfo.name }}
@@ -153,13 +155,36 @@ const handleNav = (idx: number) => {
   })
 }
 
+interface StudentData {
+  sid: number,
+  name: string
+}
+
+interface ImageResult {
+  link: string,
+  mimeType: string
+}
+
+interface DisplayData {
+  relativeData: StudentData,
+  image: ImageResult
+}
+
 // 任务基本信息展示
 const taskInfo = reactive<TaskApiTypes.TaskInfo>({ name: '', category: '' })
 const taskMoreInfo = reactive<Partial<TaskApiTypes.TaskInfo>>({})
 const sid = ref('')
 
-// 必填信息
-// const infos = reactive<InfoItem[]>([])
+const displayData = reactive<DisplayData>({
+  relativeData: {
+    sid: 0,
+    name: ''
+  },
+  image: {
+    link: null,
+    mimeType: null
+  }
+});
 
 const peopleName = ref('')
 const confirmPeopleName = () => ElMessageBox.prompt(
@@ -272,17 +297,17 @@ onMounted(async () => {
 
   // console.log("infos", infos);
 
-  FileApi.checkStudentSubmitStatus(
+  const { data: { isSubmit } } = await FileApi.checkStudentSubmitStatus(
     defaultTaskKey.value,
     parseInt(sid.value),
     peopleName.value
-  ).then((res) => {
-    if (res.data.isSubmit) {
-      ElMessage.success('已经提交过啦')
-    } else {
-      ElMessage.warning('还未提交过哟')
-    }
-  });
+  );
+
+  // 已经提交的话就直接展示，没有提交的话跳转到展示页面
+
+  if (isSubmit) {
+
+  }
 
   isLoadingData.value = false;
 
