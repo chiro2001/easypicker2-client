@@ -166,10 +166,13 @@ const login = () => {
     UserApi.login(account.value, pwd.value).then((res) => {
       const { token } = res.data
       $store.commit('user/setToken', token)
+      console.log("登录成功");
       ElMessage.success('登录成功')
       redirectDashBoard()
     }).catch((err) => {
       loginErrorMsg(err, '密码不正确')
+      console.error(err);
+      
     })
   } else {
     // 手机号验证码登录

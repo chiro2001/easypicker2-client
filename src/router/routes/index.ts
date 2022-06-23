@@ -101,7 +101,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/query/:sid',
+    path: '/query/:sutdentId',
     name: 'query',
     component: Query,
     meta: {

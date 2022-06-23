@@ -13,13 +13,13 @@
     </div>
 
     <div v-loading="isLoadingData" element-loading-text="Loading..." class="panel tc" v-if="
-      sid
+      studentId
     ">
       <div>
         <el-divider>提交信息</el-divider>
         <div class="infos">
           <div>
-            <span>学号：</span><span>{{ displayData.relativeData.sid }}</span>
+            <span>学号：</span><span>{{ displayData.relativeData.studentId }}</span>
           </div>
           <div>
             <span>姓名：</span><span>{{ displayData.relativeData.name }}</span>
@@ -74,7 +74,7 @@ const handleNav = (idx: number) => {
 }
 
 interface StudentData {
-  sid: number,
+  studentId: number,
   name: string
 }
 
@@ -91,11 +91,11 @@ interface DisplayData {
 // 任务基本信息展示
 const taskInfo = reactive<TaskApiTypes.TaskInfo>({ name: '', category: '' })
 const taskMoreInfo = reactive<Partial<TaskApiTypes.TaskInfo>>({})
-const sid = ref('')
+const studentId = ref('')
 
 const displayData = reactive<DisplayData>({
   relativeData: {
-    sid: 0,
+    studentId: 0,
     name: ''
   },
   image: {
@@ -131,9 +131,9 @@ const isEqualInfos = (a: InfoItem[] = [], b: InfoItem[] = []) => {
 
 onMounted(async () => {
   isLoadingData.value = true;
-  sid.value = $route.params.sid as string;
+  studentId.value = $route.params.sutdentId as string;
 
-  displayData.relativeData.sid = parseInt(sid.value);
+  displayData.relativeData.studentId = parseInt(studentId.value);
 
   defaultTaskKey.value = await (await TaskApi.getDefaultTask()).data.key;
   console.log("get default task key:", defaultTaskKey.value);
@@ -155,7 +155,7 @@ onMounted(async () => {
 
   const { data: { isSubmit } } = await FileApi.checkStudentSubmitStatus(
     defaultTaskKey.value,
-    displayData.relativeData.sid,
+    displayData.relativeData.studentId,
     peopleName.value
   );
 
@@ -164,7 +164,7 @@ onMounted(async () => {
   if (isSubmit) {
     const submittedFile = await FileApi.getStudentSubmitFile(
       defaultTaskKey.value,
-      displayData.relativeData.sid,
+      displayData.relativeData.studentId,
       peopleName.value
     )
     displayData.image.link = submittedFile.data.link;
