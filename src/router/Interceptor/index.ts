@@ -43,7 +43,7 @@ function registerRouteGuard(router: Router) {
         const isAdmin = (await UserApi.checkPower()).data.power
         $store.commit('user/setSuperAdmin', isAdmin)
         return isAdmin || {
-          sid: '404',
+          name: '404',
         }
       } catch (error) {
         // if (error instanceof NotAllowedError) {
