@@ -22,9 +22,6 @@
     <div v-loading="isLoadingData" element-loading-text="Loading..." class="panel tc" v-if="
       sid
     ">
-      <!-- {{ sid }}
-      {{ displayData }} -->
-
       <div>
         <el-divider>提交信息</el-divider>
         <div class="infos">
@@ -39,93 +36,7 @@
 
       <img v-bind:src="displayData.image.link" v-if="displayData.image.link"
         style="max-width: 100%; max-height: 700px;" />
-
-      <!-- <h1 class="name">
-        {{ taskInfo.name }}
-      </h1>
-      <template v-if="taskMoreInfo.tip">
-        <el-divider>⚠️ 注意事项 ⚠️</el-divider>
-        <Tip>
-          <div class="tip-wrapper">
-            <p v-for="(t, i) in taskMoreInfo.tip.split('\n')" :key="i">{{ t.replace(/\s/g,'&nbsp;') }}</p>
-          </div>
-        </Tip>
-      </template>
-      <template v-if="ddlStr">
-        <el-divider>截止时间</el-divider>
-        <h2 class="ddl">
-          {{ ddlStr }}
-          <span>
-            {{
-                isOver
-                  ? '已经结束'
-                  : waitTimeStr
-            }}
-          </span>
-        </h2>
-      </template>
-
-      <div v-if="!ddlStr || !isOver">
-        <el-divider>必要信息填写</el-divider>
-        <div class="infos">
-          <InfosForm :infos="infos" :disabled="disableForm"></InfosForm>
-        </div>
-        <el-upload style="max-width: 400px; margin: 0 auto;" :drag="!isMobile" action="" ref="fileUpload"
-          :on-change="handleChangeFile" :before-remove="
-            handleRemoveFile
-          " :on-exceed="handleExceed" :auto-upload="false" multiple :limit="limitUploadCount" :file-list="fileList">
-          <el-button v-if="isMobile" type="primary">选择文件</el-button>
-          <template v-else>
-            <el-icon class="el-icon--upload">
-              <upload-filled />
-            </el-icon>
-            <div class="el-upload__text">
-              将文件拖于此处 or <em>直接选择文件</em>
-            </div>
-          </template>
-          <template #tip>
-            <div class="p10" v-show="!!calculateMd5Count">
-              <tip>还有 {{ calculateMd5Count }} 个文件正在生成校验信息，请稍等(1G通常需要20s)</tip>
-            </div>
-          </template>
-        </el-upload>
-        <div class="p10">
-          <el-button v-if="isWithdraw" size="default" @click="startWithdraw" type="warning"
-            :disabled="!allowWithdraw || !!calculateMd5Count">一键撤回</el-button>
-          <el-button v-else size="default" @click="submitUpload" type="success"
-            :disabled="!allowUpload || !!calculateMd5Count">提交文件</el-button>
-          <el-button @click="checkSubmitStatus" size="default">查询提交情况</el-button>
-        </div>
-        
-        <div class="p10 option-tips">
-          <template v-if="isWithdraw">
-            <tip>① 须保证选择的文件与提交时的文件一致<br /> ② 填写表单信息一致 <br /> ③ 完全一模一样的文件的提交记录（内容md5+命名），将会一次性全部撤回</tip>
-          </template>
-          <template v-else>
-            <tip>① 选择完文件，点击 ”提交文件“即可 <br />
-              ② <strong>选择大文件后需要等待一会儿才展示处理</strong>
-              <template v-if="taskMoreInfo.template"><br /> ③ <strong>
-                  <el-button type="text" style="color: #85ce61" size="small" @click="downloadTemplate">右下角可 “查看提交示例”
-                  </el-button>
-                </strong></template>
-            </tip>
-          </template>
-        </div>
-        <div class="withdraw">
-          <el-button type="text" style="color: #85ce61" v-if="taskMoreInfo.template" size="small"
-            @click="downloadTemplate">查看提交示例</el-button>
-          <el-button v-if="isWithdraw" @click="isWithdraw = false" size="small" type="text">正常提交</el-button>
-          <el-button v-else size="small" @click="isWithdraw = true" type="text">我要撤回</el-button>
-        </div>
-      </div> -->
     </div>
-    <!-- 无效任务 -->
-    <!-- <div class="panel tc" v-else>
-      <h1 class="name">
-        {{ taskInfo.name }}
-      </h1>
-    </div> -->
-    <!-- <LinkDialog v-model:value="showLinkModel" title="示例文件下载链接" :link="templateLink"></LinkDialog> -->
   </div>
 </template>
 <script lang="ts" setup>
@@ -224,41 +135,6 @@ const isEqualInfos = (a: InfoItem[] = [], b: InfoItem[] = []) => {
   }
   return a.every((v, i) => (v.type === b[i].type && v.text === b[i].text && isEqualInfos(v.children, b[i].children)))
 }
-// const refreshTaskMoreInfo = (hot = false) => {
-//   TaskApi.getTaskMoreInfo(
-//     defaultTaskKey.value,
-//   ).then((res) => {
-//     Object.assign(
-//       taskMoreInfo,
-//       res.data,
-//     )
-//     if (!isEqualInfos(infos, parseInfo(
-//       taskMoreInfo.info,
-//     ))) {
-//       infos.splice(0, infos.length)
-//       infos.push(
-//         ...parseInfo(
-//           taskMoreInfo.info,
-//         ),
-//       )
-//       if (hot) {
-//         ElMessage.success('表单信息有更新')
-//       }
-//     }
-//     // refreshWaitTime(false)
-//     isLoadingData.value = false
-//   })
-// }
-
-// const handleBlur = () => {
-//   readyRefresh.value = true
-// }
-// const handleFocus = () => {
-//   if (readyRefresh.value && !disableForm.value) {
-//     readyRefresh.value = false
-//     refreshTaskMoreInfo(true)
-//   }
-// }
 
 onMounted(async () => {
   isLoadingData.value = true;
@@ -283,8 +159,6 @@ onMounted(async () => {
       taskInfo.name = '任务不存在'
     }
   })
-  // refreshTaskMoreInfo()
-  // refreshWaitTime()
 
   const { data: { isSubmit } } = await FileApi.checkStudentSubmitStatus(
     defaultTaskKey.value,
@@ -313,20 +187,11 @@ onMounted(async () => {
   }
 
   isLoadingData.value = false;
-
-  // // 页面隐藏
-  // window.addEventListener('blur', handleBlur)
-
-  // // 页面展示
-  // window.addEventListener('focus', handleFocus)
 })
 
 onUnmounted(() => {
-  // // 页面隐藏
-  // window.removeEventListener('blur', handleBlur)
-  // // 页面展示
-  // window.removeEventListener('focus', handleFocus)
 })
+
 </script>
 <style scoped lang="scss">
 .task-panel :deep(ul.el-upload-list) {
