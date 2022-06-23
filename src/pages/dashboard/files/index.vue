@@ -104,11 +104,11 @@
     <!-- 主体内容 -->
     <div class="panel">
       <Tip>占用空间：{{ filterFileSize }} / {{ fileListSize }}</Tip>
-      <Tip>请作者喝茶 🍵
+      <!-- <Tip>请作者喝茶 🍵
         <Praise>
           <el-button style="margin:0 0 2px;" size="small" type="text">Go！Go！❓</el-button>
         </Praise>
-      </Tip>
+      </Tip> -->
       <el-table v-loading="isLoadingData" element-loading-text="Loading..." tooltip-effect="dark" multipleTable
         ref="multipleTable" @selection-change="handleSelectionChange" stripe border
         :default-sort="{ prop: 'date', order: 'descending' }" :max-height="666" :data="showFilterFiles"
