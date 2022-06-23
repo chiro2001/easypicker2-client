@@ -39,7 +39,7 @@ const introduces: string[] = reactive([
 ])
 
 onMounted(async () => {
-  canRegister.value = await UserApi.checkCanRegister();
+  canRegister.value = (await UserApi.checkCanRegister()).data;
 });
 
 </script>

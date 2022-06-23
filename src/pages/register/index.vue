@@ -144,12 +144,12 @@ const handleRegister = () => {
 }
 
 onMounted(async () => {
-  const canRegister = await UserApi.checkCanRegister();
-  if (!canRegister) {
-    $router.push({
-      path: "/"
-    });
-  }
+  const canRegister = (await UserApi.checkCanRegister()).data;
+  // if (!canRegister) {
+  //   $router.push({
+  //     path: "/"
+  //   });
+  // }
 });
 
 </script>

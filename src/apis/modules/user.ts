@@ -32,8 +32,8 @@ function checkLoginStatus(): UserApiTypes.checkLoginStatus {
   return ajax.get('user/login')
 }
 
-async function checkCanRegister(): Promise<boolean> {
-  return (await ajax.get('user/canRegister')).data.canRegister;
+function checkCanRegister(): UserApiTypes.checkCanRegister {
+  return ajax.get('user/canRegister');
 }
 
 export default {

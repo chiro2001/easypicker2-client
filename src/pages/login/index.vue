@@ -187,7 +187,7 @@ const login = () => {
   }
 }
 onMounted(async () => {
-  canRegister.value = await UserApi.checkCanRegister();
+  canRegister.value = (await UserApi.checkCanRegister()).data;
 
   const token = localStorage.getItem('token')
   if (token) {

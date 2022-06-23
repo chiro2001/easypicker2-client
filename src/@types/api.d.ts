@@ -68,6 +68,7 @@ declare namespace UserApiTypes {
     type resetPwd = ResponseData<{ token?: string, openTime?: string }>
     type checkPower = ResponseData<{ power: boolean, name: string }>
     type checkLoginStatus = ResponseData<boolean>
+    type checkCanRegister = ResponseData<boolean>
 }
 
 declare namespace TaskApiTypes {
