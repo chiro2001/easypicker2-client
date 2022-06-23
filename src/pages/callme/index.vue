@@ -15,7 +15,7 @@
                 </div>
                 <hr />
                 <!-- 一堆二维码 -->
-                <div class="qq-wechat">
+                <!-- <div class="qq-wechat">
                     <ul>
                         <li v-for="(qrcode, idx) in qrCOdes" :key="idx">
                             <div class="title">{{ qrcode.text }}</div>
@@ -24,10 +24,10 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-                <div class="description">
+                </div> -->
+                <!-- <div class="description">
                     <p>如遇无法解决的账号/使用问题,欢迎小窗联系我</p>
-                </div>
+                </div> -->
                 <div class="links">
                     <router-link to="/">回到首页</router-link>
                 </div>
@@ -48,6 +48,16 @@ const baseInfo = [
     icon: Promotion,
     text: 'engineerzjl@foxmail.com',
     href: 'mailto:engineerzjl@foxmail.com',
+  },
+  {
+    icon: UserFilled,
+    text: '[HITSZ] Chiro',
+    href: 'https://chiro.work',
+  },
+  {
+    icon: Promotion,
+    text: 'Chiro2001@163.com',
+    href: 'mailto:chiro2001@163.com',
   },
 ]
 

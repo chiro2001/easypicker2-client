@@ -4,9 +4,11 @@
       <li v-for="(item, index) in navs" :key="index">
         <a target="_blank" rel="noopener" v-bind:href="item.link">{{ item.title }}</a>
       </li>
+      </ul>
+    <ul>
       <li>
         <router-link to="/author">联系作者</router-link>
-        <a style="position: relative;left: 20px;"><Praise>👍🏻</Praise></a>
+        <!-- <a style="position: relative;left: 20px;"><Praise>👍🏻</Praise></a> -->
       </li>
     </ul>
     <ul v-if="navs2.length">
@@ -30,11 +32,15 @@ import Praise from '../Praise/index.vue'
 
 const navs = reactive([
   {
+    title: "照片收集反馈",
+    link: "https://www.wenjuan.com/s/UZBZJvyooC/"
+  },
+  {
     title: '应用介绍',
     link: 'https://docs.ep.sugarat.top/',
   },
   {
-    title: '问卷反馈',
+    title: '(原项目)问卷反馈',
     link: 'https://www.wenjuan.com/s/UZBZJvA040/',
   },
 ])
