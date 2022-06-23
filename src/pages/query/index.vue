@@ -22,10 +22,23 @@
     <div v-loading="isLoadingData" element-loading-text="Loading..." class="panel tc" v-if="
       sid
     ">
-      {{ sid }}
-      {{ displayData }}
+      <!-- {{ sid }}
+      {{ displayData }} -->
 
-      <img v-bind:src="displayData.image.link" v-if="displayData.image.link" />
+      <div>
+        <el-divider>提交信息</el-divider>
+        <div class="infos">
+          <div>
+            <span>学号：</span><span>{{ displayData.relativeData.sid }}</span>
+          </div>
+          <div>
+            <span>姓名：</span><span>{{ displayData.relativeData.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <img v-bind:src="displayData.image.link" v-if="displayData.image.link"
+        style="max-width: 100%; max-height: 700px;" />
 
       <!-- <h1 class="name">
         {{ taskInfo.name }}
@@ -251,6 +264,8 @@ onMounted(async () => {
   isLoadingData.value = true;
   sid.value = $route.params.sid as string;
 
+  displayData.relativeData.sid = parseInt(sid.value);
+
   defaultTaskKey.value = await (await TaskApi.getDefaultTask()).data.key;
   console.log("get default task key:", defaultTaskKey.value);
 
@@ -271,45 +286,30 @@ onMounted(async () => {
   // refreshTaskMoreInfo()
   // refreshWaitTime()
 
-  // 卡控人员限制
-  if (taskMoreInfo.people) {
-    const name = await confirmPeopleName()
-    if (!name) {
-      ElMessage.warning(
-        '请填写有效的姓名',
-      )
-      return
-    }
-    const {
-      data: { exist },
-    } = await PeopleApi.checkPeopleIsExist(
-      defaultTaskKey.value,
-      name,
-    )
-    if (!exist) {
-      ElMessage.warning(
-        '你不在此次提交名单中,如有疑问请联系管理员',
-      )
-      return
-    }
-    peopleName.value = name
-  }
-
-  // console.log("infos", infos);
-
   const { data: { isSubmit } } = await FileApi.checkStudentSubmitStatus(
     defaultTaskKey.value,
-    parseInt(sid.value),
+    displayData.relativeData.sid,
     peopleName.value
   );
 
   // 已经提交的话就直接展示，没有提交的话跳转到展示页面
 
   if (isSubmit) {
-    const submittedFile = await FileApi.getStudentSubmitFile(defaultTaskKey.value, parseInt(sid.value), peopleName.value)
+    const submittedFile = await FileApi.getStudentSubmitFile(
+      defaultTaskKey.value,
+      displayData.relativeData.sid,
+      peopleName.value
+    )
     displayData.image.link = submittedFile.data.link;
     displayData.image.mimeType = submittedFile.data.mimeType;
-    console.log(displayData.image.link);
+    const { data: { info } } = submittedFile;
+    console.log(info);
+    const moreInfo = JSON.parse(info);
+    moreInfo.forEach(e => {
+      if (e.text == '姓名') {
+        displayData.relativeData.name = e.value;
+      }
+    });
   }
 
   isLoadingData.value = false;

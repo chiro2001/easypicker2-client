@@ -104,7 +104,7 @@ function checkStudentSubmitStatus(taskKey: string, sid: number, name = ''): File
   return ajax.post(`file/submit/student/${sid}`, { taskKey, name })
 }
 
-function getStudentSubmitFile(taskKey: string, sid: number, name = ''): FileApiTypes.getOneFileUrl {
+function getStudentSubmitFile(taskKey: string, sid: number, name = ''): FileApiTypes.getOneStudentFileUrl {
   return ajax.get(`file/oneStudent/${sid}`, { params: { taskKey, name }})
 }
 
